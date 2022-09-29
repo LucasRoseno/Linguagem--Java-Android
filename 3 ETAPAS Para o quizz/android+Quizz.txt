@@ -1,0 +1,8 @@
+tres etrapas
+
+1- Abrir outras 'telas'
+
+2- Armazenar informações c/ todos os formularios
+
+3- usar o RadioGroup
+
