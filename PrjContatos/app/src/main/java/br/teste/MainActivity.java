@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,8 +22,7 @@ public class MainActivity extends AppCompatActivity {
     EditText txtNome,txtFone;
     Button btnCadastrar, btnMostrar;
     List<String> lstNomes, lstFone;
-    TextView lblDados;
-
+    ListView lstDados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
         txtFone = findViewById(R.id.txtFone);
         btnCadastrar = findViewById(R.id.btnCadastrar);
         btnMostrar = findViewById(R.id.btnMostrar);
-        lblDados = findViewById(R.id.lblDados);
+        lstDados = findViewById(R.id.lstDados);
+
 
         lstNomes = new ArrayList<>();
         lstFone = new ArrayList<>();
@@ -53,60 +56,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                ArrayAdapter<String>adpN = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1,lstNomes);
 
-                String s = "";
-                String m = "";
-               // int med =( (lstFone.size()-1) - (lstNomes.size()-1))/2;
+                lstDados.setAdapter(adpN);
 
-
-                for (int x = 0; x <=lstFone.size()-1; x++) {
-                    String n = lstNomes.get(x);
-                    String f = lstFone.get(x);
-
-                 //   s = lstNomes.get(x) + lstFone.get(x) + "\n";
-                    s +=   "Nome: "+String.valueOf(n)+" Fone: "+String.valueOf(f) +"\n";
                 }
-                lblDados.setMovementMethod(new ScrollingMovementMethod());
-                lblDados.setText(s);
 
 
+        });
+        lstDados.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Object o = lstDados.getItemAtPosition(i);
+                String te = o.toString();
 
-              /*  for(int w=0; w<lstNomes.size()-1;w++){
+                Toast.makeText(getBaseContext(), te,Toast.LENGTH_LONG).show();
 
-                    String n = lstNomes.get(w);
-
-                    if(w > lstNomes.size()-1)
-                        w=lstNomes.size()-1;
-
-                        lblDados.setText(n);
-*/
 
             }
-
-
-
-
-
-
-/*
-                   String n = lstNomes.get(contar);
-                   contar++;
-                   if(contar > lstNomes.size()-1){
-                       contar=lstNomes.size()-1;
-
-
-                   lblDados.setText(String.valueOf(lstNomes));
-
-
-               }
-
-*/
-
-            // Toast.makeText(getBaseContext(),n,Toast.LENGTH_LONG).show();
-
-
-
-
         });
 
 
